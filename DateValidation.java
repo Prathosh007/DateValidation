@@ -1,12 +1,22 @@
 package validateDate;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class DateValidation {
     public static void main(String[] args) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+
         try {
+
             Scanner in = new Scanner(System.in);
             System.out.print("Enter the date in format [DD/MM/YYYY] :");
             String date = in.nextLine();
@@ -59,6 +69,10 @@ public class DateValidation {
             int dd = Integer.parseInt(day);
             int mm = Integer.parseInt(month);
             int yyyy = Integer.parseInt(year);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+            Calendar c = Calendar.getInstance();
+
             try {
                 YearMonth noOfDays = YearMonth.of(yyyy, mm);
                 int DaysInMonth = noOfDays.lengthOfMonth();
@@ -72,14 +86,18 @@ public class DateValidation {
                     } else if (dd == DaysInMonth && mm == 12) {
                         dd = 1;
                         mm = 1;
+                        c.set(yyyy, 31, 12);
                         yyyy++;
+                        c.setTime(dateFormat.parse(date));
+                        c.add(Calendar.DATE, 1);
                     }
+
                     LocalDate nextDate = LocalDate.of(yyyy, mm, dd);
 
                     System.out.printf(" %d/%d/%d---->", dd, mm, yyyy);
                     System.out.println(nextDate.getDayOfWeek().toString());
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Please enter valid date");
             }
         } catch (Exception e) {
