@@ -1,6 +1,7 @@
 package validateDate;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Scanner;
 
 public class DateValidation {
@@ -58,99 +59,27 @@ public class DateValidation {
             int dd = Integer.parseInt(day);
             int mm = Integer.parseInt(month);
             int yyyy = Integer.parseInt(year);
-
-            int yes = 0;
             try {
-                if (((yyyy % 4 == 0) && ((yyyy % 400 == 0) || (yyyy % 100 != 0)))) {
-                    yes = 1;
+                YearMonth noOfDays = YearMonth.of(yyyy, mm);
+                int DaysInMonth = noOfDays.lengthOfMonth();
+
+                for (int i = 0; i < 7; i++) {
+                    if (dd < DaysInMonth) {
+                        dd++;
+                    } else if (dd == DaysInMonth && mm != 12) {
+                        dd = 1;
+                        mm++;
+                    } else if (dd == DaysInMonth && mm == 12) {
+                        dd = 1;
+                        mm = 1;
+                        yyyy++;
+                    }
+                    LocalDate nextDate = LocalDate.of(yyyy, mm, dd);
+
+                    System.out.printf(" %d/%d/%d---->", dd, mm, yyyy);
+                    System.out.println(nextDate.getDayOfWeek().toString());
                 }
-
-                LocalDate someDate = LocalDate.of(yyyy, mm, dd);
-                System.out.println(date + " ----> " + someDate.getDayOfWeek().toString());
-
-                if (yes == 1 && mm == 2) {                   //leapyear(feb)
-                    for (int i = 0; i < 7; i++) {
-                        if (dd < 29) {
-                            dd++;
-                        } else if (dd == 29 && mm != 12) {
-                            dd = 1;
-                            mm++;
-
-                        } else if (dd == 29 && mm == 12) {
-                            dd = 1;
-                            mm = 1;
-                            yyyy++;
-
-                        }
-                        LocalDate nextDate = LocalDate.of(yyyy, mm, dd);
-
-                        System.out.printf(" %d/%d/%d---->", dd, mm, yyyy);
-                        System.out.println(nextDate.getDayOfWeek().toString());
-
-                    }
-                } else if (yes == 0 && mm == 2) {                  //non-leap year(feb)
-                    for (int i = 0; i < 7; i++) {
-
-                        if (dd < 28) {
-                            dd++;
-                        } else if (dd == 28 && mm != 12) {
-                            dd = 1;
-                            mm++;
-
-                        } else if (dd == 28 && mm == 12) {
-                            dd = 1;
-                            mm = 1;
-                            yyyy++;
-
-                        }
-                        LocalDate nextDate = LocalDate.of(yyyy, mm, dd);
-
-                        System.out.printf("%d/%d/%d---->", dd, mm, yyyy);
-                        System.out.println(nextDate.getDayOfWeek().toString());
-
-                    }
-                } else if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12) { //(31 days)
-                    for (int i = 0; i < 7; i++) {
-
-                        if (dd < 31) {
-                            dd++;
-                        } else if (dd == 31 && mm != 12) {
-                            dd = 1;
-                            mm++;
-
-                        } else if (dd == 31 && mm == 12) {
-                            dd = 1;
-                            mm = 1;
-                            yyyy++;
-
-                        }
-                        LocalDate nextDate = LocalDate.of(yyyy, mm, dd);
-                        System.out.printf("%d/%d/%d---->", dd, mm, yyyy);
-                        System.out.println(nextDate.getDayOfWeek().toString());
-
-                    }
-                } else {
-                    for (int i = 0; i < 7; i++) {     //(30 days)
-
-                        if (dd < 30) {
-                            dd++;
-                        } else if (dd == 30 && mm != 12) {
-                            dd = 1;
-                            mm++;
-
-                        } else if (dd == 30 && mm == 12) {
-                            dd = 1;
-                            mm = 1;
-                            yyyy++;
-
-                        }
-                        LocalDate nextDate = LocalDate.of(yyyy, mm, dd);
-                        System.out.printf("%d/%d/%d---->", dd, mm, yyyy);
-                        System.out.println(nextDate.getDayOfWeek().toString());
-                    }
-
-                }
-            } catch (Exception e) {
+            }catch(Exception e){
                 System.out.println("Please enter valid date");
             }
         } catch (Exception e) {
