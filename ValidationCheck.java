@@ -8,41 +8,62 @@ public class ValidationCheck {
         try {
             if (date.length() != 10) {
                 System.out.println("Length limit not maintained");
-                System.out.println("Please enter the date in valid format [DD/MM/YYYY]");
+                System.out.println("Please enter the date in valid format [DD/MM/YYYY].");
                 System.exit(0);
             } else if (date.charAt(2) != '/' || date.charAt(5) != '/') {
                 System.out.println("Please use '/'");
-                System.out.println("Please enter the date in valid format [DD/MM/YYYY]");
+                System.out.println("Please enter the date in valid format [DD/MM/YYYY].");
                 System.exit(0);
             }
+        } catch (Exception e) {
+            System.out.println("Enter valid date.");
+        }
+        return date;
+    }
+
+    public void DayValidate(String date) {
+        try {
             for (int i = 0; i < 2; i++) {
                 if (Character.isDigit(date.toCharArray()[i])) {
                     continue;
                 } else {
-                    System.out.println("Day is not in integer");
-                    break;
-                }
-            }
-            for (int i = 3; i < 5; i++) {
-                if (Character.isDigit(date.toCharArray()[i])) {
-                    continue;
-                } else {
-                    System.out.println("Month is not in integer");
-                    break;
-                }
-            }
-            for (int i = 6; i < 10; i++) {
-                if (Character.isDigit(date.toCharArray()[i])) {
-                    continue;
-                } else {
-                    System.out.println("Year is not in integer");
+                    System.out.println("Day is not in integer.");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Enter valid date");
+            System.out.println("Please enter valid date.");
         }
-        return date;
+    }
+
+    public void MonthValidate(String date) {
+        try {
+            for (int i = 3; i < 5; i++) {
+                if (Character.isDigit(date.toCharArray()[i])) {
+                    continue;
+                } else {
+                    System.out.println("Month is not in integer.");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Please enter valid date.");
+        }
+    }
+
+    public void YearValidate(String date) {
+        try {
+            for (int i = 6; i < 10; i++) {
+                if (Character.isDigit(date.toCharArray()[i])) {
+                    continue;
+                } else {
+                    System.out.println("Year is not in integer.");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Please enter valid date.");
+        }
     }
 
     public void PrintDays(int yyyy, int mm, int dd, String date) {
@@ -70,7 +91,7 @@ public class ValidationCheck {
             }
 
         } catch (Exception e) {
-            System.out.println("Please enter valid date");
+            System.out.println("Please enter valid date.");
         }
     }
 
@@ -81,12 +102,23 @@ public class ValidationCheck {
             System.out.print("Enter the date in format [DD/MM/YYYY] :");
             String date = in.nextLine();
 
-            ValidationCheck format = new ValidationCheck();
-            format.DateFormatCheck(date);
 
             String inputDay = String.valueOf(date.substring(0, 2));
             String inputMonth = String.valueOf(date.substring(3, 5));
             String inputYear = String.valueOf(date.substring(6, 10));
+
+            ValidationCheck format = new ValidationCheck();
+            format.DateFormatCheck(date);
+
+            ValidationCheck dayValidate = new ValidationCheck();
+            dayValidate.DayValidate(date);
+
+            ValidationCheck monthValidate = new ValidationCheck();
+            monthValidate.MonthValidate(date);
+
+            ValidationCheck yearValidate = new ValidationCheck();
+            yearValidate.YearValidate(date);
+
 
             int dd = Integer.parseInt(inputDay);
             int mm = Integer.parseInt(inputMonth);
@@ -96,7 +128,7 @@ public class ValidationCheck {
             ValidationCheck print = new ValidationCheck();
             print.PrintDays(yyyy, mm, dd, date);
         } catch (Exception e) {
-            System.out.println("Please enter valid date");
+            System.out.println("Please enter valid date.");
         }
 
     }
