@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ValidationCheck {
-
     public String DateFormatCheck(String date) {
         try {
             if (date.length() != 10) {
-                System.out.println("Length limit exceeded");
+                System.out.println("Length limit not maintained");
                 System.out.println("Please enter the date in valid format [DD/MM/YYYY]");
                 System.exit(0);
             } else if (date.charAt(2) != '/' || date.charAt(5) != '/') {
@@ -77,24 +76,28 @@ public class ValidationCheck {
 
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter the date in format [DD/MM/YYYY] :");
-        String date = in.nextLine();
+        try {
+            Scanner in = new Scanner(System.in);
+            System.out.print("Enter the date in format [DD/MM/YYYY] :");
+            String date = in.nextLine();
 
-        String inputDay = String.valueOf(date.substring(0, 2));
-        String inputMonth = String.valueOf(date.substring(3, 5));
-        String inputYear = String.valueOf(date.substring(6, 10));
+            ValidationCheck format = new ValidationCheck();
+            format.DateFormatCheck(date);
 
-        int dd = Integer.parseInt(inputDay);
-        int mm = Integer.parseInt(inputMonth);
-        int yyyy = Integer.parseInt(inputYear);
+            String inputDay = String.valueOf(date.substring(0, 2));
+            String inputMonth = String.valueOf(date.substring(3, 5));
+            String inputYear = String.valueOf(date.substring(6, 10));
+
+            int dd = Integer.parseInt(inputDay);
+            int mm = Integer.parseInt(inputMonth);
+            int yyyy = Integer.parseInt(inputYear);
 
 
-        ValidationCheck format = new ValidationCheck();
-        format.DateFormatCheck(date);
-
-        ValidationCheck print = new ValidationCheck();
-        print.PrintDays(yyyy, mm, dd, date);
+            ValidationCheck print = new ValidationCheck();
+            print.PrintDays(yyyy, mm, dd, date);
+        } catch (Exception e) {
+            System.out.println("Please enter valid date");
+        }
 
     }
 }
