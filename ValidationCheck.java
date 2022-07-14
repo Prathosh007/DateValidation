@@ -1,4 +1,5 @@
 package validateDate;
+
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -134,7 +135,13 @@ public class ValidationCheck {
         print.printDays(yyyy, mm, dd);
 
         String[] yearEndResult = print.printDays(2000, 12, 31);
-        String[] yearEndExpected = {"1/1/2001--->MONDAY", "2/1/2001--->TUESDAY", "3/1/2001--->WEDNESDAY", "4/1/2001--->THURSDAY", "5/1/2001--->FRIDAY", "6/1/2001--->SATURDAY", "7/1/2001--->SUNDAY"};
+        String[] yearEndExpected = {"1/1/2001--->MONDAY",
+                "2/1/2001--->TUESDAY",
+                "3/1/2001--->WEDNESDAY",
+                "4/1/2001--->THURSDAY",
+                "5/1/2001--->FRIDAY",
+                "6/1/2001--->SATURDAY",
+                "7/1/2001--->SUNDAY"};
         System.out.println("\nTestcase1(result)");
         for (int i = 0; i < 7; i++) {
             System.out.println(yearEndResult[i]);
@@ -152,7 +159,13 @@ public class ValidationCheck {
         }
 
         String[] leapYearResult = print.printDays(2000, 02, 28);
-        String[] leapYearExpected = {"29/2/2000--->TUESDAY", "1/3/2000--->WEDNESDAY", "2/3/2000--->THURSDAY", "3/3/2000--->FRIDAY", "4/3/2000--->SATURDAY", "5/3/2000--->SUNDAY", "6/3/2000--->MONDAY"};
+        String[] leapYearExpected = {"29/2/2000--->TUESDAY",
+                "1/3/2000--->WEDNESDAY",
+                "2/3/2000--->THURSDAY",
+                "3/3/2000--->FRIDAY",
+                "4/3/2000--->SATURDAY",
+                "5/3/2000--->SUNDAY",
+                "6/3/2000--->MONDAY"};
         System.out.println("\nTestcase2(result)");
         for (int i = 0; i < 7; i++) {
             System.out.println(leapYearResult[i]);
@@ -170,7 +183,14 @@ public class ValidationCheck {
         }
 
         String[] nonLeapYearResult = print.printDays(2001, 02, 27);
-        String[] nonLeapyearExpected = {"28/2/2001--->WEDNESDAY", "1/3/2001--->THURSDAY", "2/3/2001--->FRIDAY", "3/3/2001--->SATURDAY", "4/3/2001--->SUNDAY", "5/3/2001--->MONDAY", "6/3/2001--->TUESDAY"};
+        String[] nonLeapyearExpected = {"28/2/2001--->WEDNESDAY",
+                "1/3/2001--->THURSDAY",
+                "2/3/2001--->FRIDAY",
+                "3/3/2001--->SATURDAY",
+                "4/3/2001--->SUNDAY",
+                "5/3/2001--->MONDAY",
+                "6/3/2001--->TUESDAY"};
+
         System.out.println("\nTestcase3(result)");
         for (int i = 0; i < 7; i++) {
             System.out.println(nonLeapYearResult[i]);
