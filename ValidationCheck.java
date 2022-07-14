@@ -71,7 +71,7 @@ public class ValidationCheck {
     public String[] printDays(int yyyy, int mm, int dd) {
         String stringArray[] = new String[7];
         LocalDate givenDate = LocalDate.of(yyyy, mm, dd);
-//        System.out.println(dd + "/" + mm + "/" + yyyy + "--" + givenDate.getDayOfWeek());
+//        System.out.println(dd + "/" + mm + "/" + yyyy + which is a + givenDate.getDayOfWeek());
 
         for (int i = 0; i < 7; i++) {
             dd = i + 1;
@@ -86,7 +86,7 @@ public class ValidationCheck {
             int year = Integer.parseInt(nextYear);
 
             LocalDate finalDate = LocalDate.of(year, month, day);
-            stringArray[i] = day + "/" + month + "/" + year + "--" + finalDate.getDayOfWeek();
+            stringArray[i] = day + "/" + month + "/" + year + " which is a " + finalDate.getDayOfWeek();
 //            System.out.println(stringArray[i]);
         }
         return stringArray;
@@ -95,7 +95,7 @@ public class ValidationCheck {
     public String getDays(int day, int month, int year) {
 
         LocalDate finalDate = LocalDate.of(year, month, day);
-        System.out.print(day + "/" + month + "/" + year + "--");
+        System.out.print(day + "/" + month + "/" + year + " which is a ");
         System.out.println(finalDate.getDayOfWeek());
         return null;
 
@@ -134,13 +134,13 @@ public class ValidationCheck {
             print.printDays(yyyy, mm, dd);
 
             String[] yearEndResult = print.printDays(2000, 12, 31);
-            String[] yearEndExpected = {"1/1/2001--MONDAY",
-                    "2/1/2001--TUESDAY",
-                    "3/1/2001--WEDNESDAY",
-                    "4/1/2001--THURSDAY",
-                    "5/1/2001--FRIDAY",
-                    "6/1/2001--SATURDAY",
-                    "7/1/2001--SUNDAY"};
+            String[] yearEndExpected = {"1/1/2001 which is a MONDAY",
+                    "2/1/2001 which is a TUESDAY",
+                    "3/1/2001 which is a WEDNESDAY",
+                    "4/1/2001 which is a THURSDAY",
+                    "5/1/2001 which is a FRIDAY",
+                    "6/1/2001 which is a SATURDAY",
+                    "7/1/2001 which is a SUNDAY"};
             for (int i = 0; i < 7; i++) {
                 if (yearEndExpected[i].equalsIgnoreCase(yearEndResult[i])) {
                     flag = 1;
@@ -156,13 +156,13 @@ public class ValidationCheck {
             }
 
             String[] leapYearResult = print.printDays(2000, 02, 28);
-            String[] leapYearExpected = {"29/2/2000--TUESDAY",
-                    "1/3/2000--WEDNESDAY",
-                    "2/3/2000--THURSDAY",
-                    "3/3/2000--FRIDAY",
-                    "4/3/2000--SATURDAY",
-                    "5/3/2000--SUNDAY",
-                    "6/3/2000--MONDAY"};
+            String[] leapYearExpected = {"29/2/2000 which is a TUESDAY",
+                    "1/3/2000 which is a WEDNESDAY",
+                    "2/3/2000 which is a THURSDAY",
+                    "3/3/2000 which is a FRIDAY",
+                    "4/3/2000 which is a SATURDAY",
+                    "5/3/2000 which is a SUNDAY",
+                    "6/3/2000 which is a MONDAY"};
 
             for (int i = 0; i < 7; i++) {
                 if (leapYearExpected[i].equalsIgnoreCase(leapYearResult[i])) {
@@ -179,13 +179,13 @@ public class ValidationCheck {
             }
 
             String[] nonLeapYearResult = print.printDays(2001, 02, 27);
-            String[] nonLeapyearExpected = {"28/2/2001--WEDNESDAY",
-                    "1/3/2001--THURSDAY",
-                    "2/3/2001--FRIDAY",
-                    "3/3/2001--SATURDAY",
-                    "4/3/2001--SUNDAY",
-                    "5/3/2001--MONDAY",
-                    "6/3/2001--TUESDAY"};
+            String[] nonLeapyearExpected = {"28/2/2001 which is a WEDNESDAY",
+                    "1/3/2001 which is a THURSDAY",
+                    "2/3/2001 which is a FRIDAY",
+                    "3/3/2001 which is a SATURDAY",
+                    "4/3/2001 which is a SUNDAY",
+                    "5/3/2001 which is a MONDAY",
+                    "6/3/2001 which is a TUESDAY"};
 
             for (int i = 0; i < 7; i++) {
                 if (nonLeapyearExpected[i].equalsIgnoreCase(nonLeapYearResult[i])) {
@@ -203,12 +203,12 @@ public class ValidationCheck {
 
             String[] julyResult = print.printDays(2001, 07, 27);
             String[] julyExpected = {"28/7/2001--SATURDAY",
-                    "29/7/2001--SUNDAY",
-                    "30/7/2001--MONDAY",
-                    "31/7/2001--TUESDAY",
-                    "1/8/2001--WEDNESDAY",
-                    "2/8/2001--THURSDAY",
-                    "3/8/2001--FRIDAY"};
+                    "29/7/2001 which is a SUNDAY",
+                    "30/7/2001 which is a MONDAY",
+                    "31/7/2001 which is a TUESDAY",
+                    "1/8/2001 which is a WEDNESDAY",
+                    "2/8/2001 which is a THURSDAY",
+                    "3/8/2001 which is a FRIDAY"};
 
             for (int i = 0; i < 7; i++) {
                 if (nonLeapyearExpected[i].equalsIgnoreCase(nonLeapYearResult[i])) {
