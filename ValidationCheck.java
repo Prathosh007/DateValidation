@@ -71,7 +71,7 @@ public class ValidationCheck {
     public String[] printDays(int yyyy, int mm, int dd) {
         String stringArray[] = new String[7];
         LocalDate givenDate = LocalDate.of(yyyy, mm, dd);
-//        System.out.println(dd + "/" + mm + "/" + yyyy + "---->" + givenDate.getDayOfWeek());
+//        System.out.println(dd + "/" + mm + "/" + yyyy + "--" + givenDate.getDayOfWeek());
 
         for (int i = 0; i < 7; i++) {
             dd = i + 1;
@@ -86,7 +86,7 @@ public class ValidationCheck {
             int year = Integer.parseInt(nextYear);
 
             LocalDate finalDate = LocalDate.of(year, month, day);
-            stringArray[i] = day + "/" + month + "/" + year + "--->" + finalDate.getDayOfWeek();
+            stringArray[i] = day + "/" + month + "/" + year + "--" + finalDate.getDayOfWeek();
 //            System.out.println(stringArray[i]);
         }
         return stringArray;
@@ -95,7 +95,7 @@ public class ValidationCheck {
     public String getDays(int day, int month, int year) {
 
         LocalDate finalDate = LocalDate.of(year, month, day);
-        System.out.print(day + "/" + month + "/" + year + "---->");
+        System.out.print(day + "/" + month + "/" + year + "--");
         System.out.println(finalDate.getDayOfWeek());
         return null;
 
@@ -103,134 +103,131 @@ public class ValidationCheck {
     }
 
     public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter the date in format [DD/MM/YYYY] :");
-        String date = in.nextLine();
-
-
-        String inputDay = String.valueOf(date.substring(0, 2));
-        String inputMonth = String.valueOf(date.substring(3, 5));
-        String inputYear = String.valueOf(date.substring(6, 10));
-
-        ValidationCheck format = new ValidationCheck();
-        format.dateFormatCheck(date);
-
-        ValidationCheck dayValidate = new ValidationCheck();
-        dayValidate.DayValidate(date);
-
-        ValidationCheck monthValidate = new ValidationCheck();
-        monthValidate.MonthValidate(date);
-
-        ValidationCheck yearValidate = new ValidationCheck();
-        yearValidate.YearValidate(date);
+        try {
+            Scanner in = new Scanner(System.in);
+            System.out.print("Enter the date in format [DD/MM/YYYY] :");
+            String date = in.nextLine();
 
 
-        int dd = Integer.parseInt(inputDay);
-        int mm = Integer.parseInt(inputMonth);
-        int yyyy = Integer.parseInt(inputYear);
+            String inputDay = String.valueOf(date.substring(0, 2));
+            String inputMonth = String.valueOf(date.substring(3, 5));
+            String inputYear = String.valueOf(date.substring(6, 10));
+
+            ValidationCheck format = new ValidationCheck();
+            format.dateFormatCheck(date);
+
+            ValidationCheck dayValidate = new ValidationCheck();
+            dayValidate.DayValidate(date);
+
+            ValidationCheck monthValidate = new ValidationCheck();
+            monthValidate.MonthValidate(date);
+
+            ValidationCheck yearValidate = new ValidationCheck();
+            yearValidate.YearValidate(date);
 
 
-        ValidationCheck print = new ValidationCheck();
-        print.printDays(yyyy, mm, dd);
+            int dd = Integer.parseInt(inputDay);
+            int mm = Integer.parseInt(inputMonth);
+            int yyyy = Integer.parseInt(inputYear);
 
-        String[] yearEndResult = print.printDays(2000, 12, 31);
-        String[] yearEndExpected = {"1/1/2001--->MONDAY",
-                "2/1/2001--->TUESDAY",
-                "3/1/2001--->WEDNESDAY",
-                "4/1/2001--->THURSDAY",
-                "5/1/2001--->FRIDAY",
-                "6/1/2001--->SATURDAY",
-                "7/1/2001--->SUNDAY"};
-        System.out.println("\nTestcase1(result)");
-        for (int i = 0; i < 7; i++) {
-            System.out.println(yearEndResult[i]);
-            if (yearEndExpected[i].equalsIgnoreCase(yearEndResult[i])) {
-                flag = 1;
-            } else {
-                flag = 0;
-                break;
+            ValidationCheck print = new ValidationCheck();
+            print.printDays(yyyy, mm, dd);
+
+            String[] yearEndResult = print.printDays(2000, 12, 31);
+            String[] yearEndExpected = {"1/1/2001--MONDAY",
+                    "2/1/2001--TUESDAY",
+                    "3/1/2001--WEDNESDAY",
+                    "4/1/2001--THURSDAY",
+                    "5/1/2001--FRIDAY",
+                    "6/1/2001--SATURDAY",
+                    "7/1/2001--SUNDAY"};
+            for (int i = 0; i < 7; i++) {
+                if (yearEndExpected[i].equalsIgnoreCase(yearEndResult[i])) {
+                    flag = 1;
+                } else {
+                    flag = 0;
+                    break;
+                }
             }
-        }
-        if (flag == 1) {
-            System.out.println("Test case 1 is passed");
-        } else {
-            System.out.println("Test case 1 is failed");
-        }
-
-        String[] leapYearResult = print.printDays(2000, 02, 28);
-        String[] leapYearExpected = {"29/2/2000--->TUESDAY",
-                "1/3/2000--->WEDNESDAY",
-                "2/3/2000--->THURSDAY",
-                "3/3/2000--->FRIDAY",
-                "4/3/2000--->SATURDAY",
-                "5/3/2000--->SUNDAY",
-                "6/3/2000--->MONDAY"};
-        System.out.println("\nTestcase2(result)");
-        for (int i = 0; i < 7; i++) {
-            System.out.println(leapYearResult[i]);
-            if (leapYearExpected[i].equalsIgnoreCase(leapYearResult[i])) {
-                flag = 1;
+            if (flag == 1) {
+                System.out.println("Works properly for year end: TRUE");
             } else {
-                flag = 0;
-                break;
+                System.out.println("Works properly for year end: FALSE");
             }
-        }
-        if (flag == 1) {
-            System.out.println("Test case 2 is passed");
-        } else {
-            System.out.println("Test case 2 is failed");
-        }
 
-        String[] nonLeapYearResult = print.printDays(2001, 02, 27);
-        String[] nonLeapyearExpected = {"28/2/2001--->WEDNESDAY",
-                "1/3/2001--->THURSDAY",
-                "2/3/2001--->FRIDAY",
-                "3/3/2001--->SATURDAY",
-                "4/3/2001--->SUNDAY",
-                "5/3/2001--->MONDAY",
-                "6/3/2001--->TUESDAY"};
+            String[] leapYearResult = print.printDays(2000, 02, 28);
+            String[] leapYearExpected = {"29/2/2000--TUESDAY",
+                    "1/3/2000--WEDNESDAY",
+                    "2/3/2000--THURSDAY",
+                    "3/3/2000--FRIDAY",
+                    "4/3/2000--SATURDAY",
+                    "5/3/2000--SUNDAY",
+                    "6/3/2000--MONDAY"};
 
-        System.out.println("\nTestcase3(result)");
-        for (int i = 0; i < 7; i++) {
-            System.out.println(nonLeapYearResult[i]);
-            if (nonLeapyearExpected[i].equalsIgnoreCase(nonLeapYearResult[i])) {
-                flag = 1;
+            for (int i = 0; i < 7; i++) {
+                if (leapYearExpected[i].equalsIgnoreCase(leapYearResult[i])) {
+                    flag = 1;
+                } else {
+                    flag = 0;
+                    break;
+                }
+            }
+            if (flag == 1) {
+                System.out.println("Works properly for leap-year: TRUE");
             } else {
-                flag = 0;
-                break;
+                System.out.println("Works properly for leap-year: FALSE");
             }
-        }
-        if (flag == 1) {
-            System.out.println("Test case 3 is passed");
-        } else {
-            System.out.println("Test case 3 is failed");
-        }
 
-        String[] julyResult = print.printDays(2001, 07, 27);
-        String[] julyExpected = {"28/7/2001--->SATURDAY",
-                "29/7/2001--->SUNDAY",
-                "30/7/2001--->MONDAY",
-                "31/7/2001--->TUESDAY",
-                "1/8/2001--->WEDNESDAY",
-                "2/8/2001--->THURSDAY",
-                "3/8/2001--->FRIDAY"};
-        System.out.println("\nTestcase4(result)");
-        for (int i = 0; i < 7; i++) {
-            System.out.println(nonLeapYearResult[i]);
-            if (nonLeapyearExpected[i].equalsIgnoreCase(nonLeapYearResult[i])) {
-                flag = 1;
-            } else {
-                flag = 0;
-                break;
+            String[] nonLeapYearResult = print.printDays(2001, 02, 27);
+            String[] nonLeapyearExpected = {"28/2/2001--WEDNESDAY",
+                    "1/3/2001--THURSDAY",
+                    "2/3/2001--FRIDAY",
+                    "3/3/2001--SATURDAY",
+                    "4/3/2001--SUNDAY",
+                    "5/3/2001--MONDAY",
+                    "6/3/2001--TUESDAY"};
+
+            for (int i = 0; i < 7; i++) {
+                if (nonLeapyearExpected[i].equalsIgnoreCase(nonLeapYearResult[i])) {
+                    flag = 1;
+                } else {
+                    flag = 0;
+                    break;
+                }
             }
-        }
-        if (flag == 1) {
-            System.out.println("Test case 4 is passed");
-        } else {
-            System.out.println("Test case 4 is failed");
+            if (flag == 1) {
+                System.out.println("Works properly for non-leap year: TRUE");
+            } else {
+                System.out.println("Works properly for non-leap year: FALSE");
+            }
+
+            String[] julyResult = print.printDays(2001, 07, 27);
+            String[] julyExpected = {"28/7/2001--SATURDAY",
+                    "29/7/2001--SUNDAY",
+                    "30/7/2001--MONDAY",
+                    "31/7/2001--TUESDAY",
+                    "1/8/2001--WEDNESDAY",
+                    "2/8/2001--THURSDAY",
+                    "3/8/2001--FRIDAY"};
+
+            for (int i = 0; i < 7; i++) {
+                if (nonLeapyearExpected[i].equalsIgnoreCase(nonLeapYearResult[i])) {
+                    flag = 1;
+                } else {
+                    flag = 0;
+                    break;
+                }
+            }
+            if (flag == 1) {
+                System.out.println("Works properly for july month end: TRUE");
+            } else {
+                System.out.println("Works properly for july month end: FALSE");
+            }
+        } catch (Exception e) {
+            System.out.println("Please enter valid date");
         }
     }
+
 }
 
 
