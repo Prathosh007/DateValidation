@@ -208,17 +208,13 @@ public class ValidationCheck {
             validate.DayValidate(date);
             validate.MonthValidate(date);
             validate.YearValidate(date);
-
-            ValidationCheck printResult = new ValidationCheck();
             LinkedHashMap<String, String>  result = validate.getDays(inputYear, inputMonth, inputDay);
-            printResult.printResult(result);
-
-            ValidationCheck testCase = new ValidationCheck();
-            testCase.testLeapYear();
-            testCase.testNonLeapYear();
-            testCase.testYearEnd();
-            testCase.test31Days();
-            testCase.test30Days();
+            validate.printResult(result);
+            validate.testLeapYear();
+            validate.testNonLeapYear();
+            validate.testYearEnd();
+            validate.test31Days();
+            validate.test30Days();
         } catch (Exception e) {
             System.out.println("Please enter valid date");
         }
